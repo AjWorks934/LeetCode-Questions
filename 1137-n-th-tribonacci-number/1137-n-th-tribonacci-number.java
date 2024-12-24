@@ -1,21 +1,18 @@
 class Solution {
+    public int tribhelp(int n,int arr[]){
+        if(n<=0)
+        return 0;
+        if(n<=2)
+        return 1;
+        if(arr[n]!=0)
+        return arr[n];
+        arr[n]=tribhelp(n-1,arr)+tribhelp(n-2,arr)+tribhelp(n-3,arr);
+        return arr[n];
+    }
     public int tribonacci(int n) {
-        int trib=0;
-        if(n==0)
-         trib= 0;
-        if(n==1)
-        trib= 1;
-        if(n==2)
-        trib=1;
-        //return fib(n-1)+fib(n-2);
-        int p=0,q=1,r=1;
-        for(int i=2;i<n;i++){
-            trib=p+q+r;
-            p=q;
-            q=r;
-            r=trib;
-        }
-        return trib;
+        int arr[]=new int[n+1];
+        Arrays.fill(arr,0);
+        return tribhelp(n,arr);
     }
 }
     
