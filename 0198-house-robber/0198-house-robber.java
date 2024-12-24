@@ -1,13 +1,19 @@
 class Solution {
-    public int rob(int[] nums) {
-        int prev2=0;
-        int prev1=0;
-        int ans=nums[0];
-        for(int i=0;i<nums.length;i++){
-            ans=Math.max(nums[i]+prev2,prev1);
-            prev2=prev1;
-            prev1=ans;
-        }
-        return ans;
+ int[] memo;
+public int rob(int[] nums) {
+    memo = new int[nums.length + 1];
+    Arrays.fill(memo, -1);
+    return robhelper(nums, nums.length - 1);
+}
+public int robhelper(int[] nums, int i) {
+    if (i < 0) {
+        return 0;
     }
+    if (memo[i] >= 0) {
+        return memo[i];
+    }
+    int result = Math.max(robhelper(nums, i - 2) + nums[i], robhelper(nums, i - 1));
+    memo[i] = result;
+    return result;
+}
 }
