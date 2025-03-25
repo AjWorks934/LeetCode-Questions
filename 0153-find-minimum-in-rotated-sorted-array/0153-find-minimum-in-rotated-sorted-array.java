@@ -1,16 +1,10 @@
-class Solution {//here we have hald sorted parted arrays bot peak elements
+class Solution {//brute force approach O(n)
     public int findMin(int[] nums) {
-    int s=0;int e=nums.length-1;
-        while(s<e)
-        {
-            int mid=s+(e-s)/2;
-            if(nums[mid]<nums[e])
-                e=mid;
-            else
-                s=mid+1;//
-        }   
-        System .out.println(nums[s]);
-        return nums[s];
+        int min=nums[0];
+        for(int i=0;i<nums.length;i++){
+            min=Math.min(min,nums[i]);
+        }
+        return min;
     
     }
 }
