@@ -1,9 +1,23 @@
 class Solution {
     public int singleNonDuplicate(int[] nums) {
-        int ele=nums[0];
-        for(int i=1;i<nums.length;i++){    
-        ele=ele^nums[i];   
+        int l=0;
+        int r=nums.length-1;
+        while(l<r){
+            int mid=l+(r-l)/2;
+            if(mid%2==0){
+                if(nums[mid]==nums[mid+1])
+                    l=mid+2;
+            else
+                r=mid;
+            }
+            if(mid%2!=0)
+            { 
+                if(nums[mid]==nums[mid-1])
+                    l=mid+1;
+                else
+                    r=mid;
+            }
         }
-        return ele;
+        return nums[l];
     }
 }
