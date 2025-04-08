@@ -2,7 +2,7 @@ class Solution {
     public String removeOuterParentheses(String s) {
         int k=0;int c=0;
         String ans="";
-        Stack<Character> st=new Stack<>();
+        //Stack<Character> st=new Stack<>();
         while(k<s.length()){
            if(s.charAt(k)=='('){
             c++;
