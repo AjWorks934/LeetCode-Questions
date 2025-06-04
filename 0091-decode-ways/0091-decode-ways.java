@@ -1,28 +1,27 @@
 class Solution {
-    public int helper(int i, String str, int n,int arr[]) {
-        if (i == n) {
-            return 1;
-        }
-        if (str.charAt(i) == '0')
-            return 0;
-        int d = 0;
-        int s = 0;
-
-        if (arr[i] == 0) {
-            s = helper(i + 1, str, n,arr);
-            if (i < n - 1) {
-                if ((str.charAt(i) == '1') || (str.charAt(i) == '2' && str.charAt(i + 1) <= '6')) {
-                    d = helper(i + 2, str, n,arr);
-                }
+    public int helper(String str, int n, int arr[]) {
+        int prev=0;
+        if(str.charAt(n-1)!='0')
+            prev=1;
+        int prevd=1;
+        for (int i = n - 2; i >= 0; i--) {
+            int ans=0;
+            if (str.charAt(i) != '0')
+            {
+                ans=prev;
+           // if (i+1 < n ) {
+                if ((str.charAt(i) == '1') || (str.charAt(i) == '2' && str.charAt(i + 1) <= '6'))
+                    ans += prevd;
             }
-            arr[i]=s+d;
+
+            prevd=prev;
+            prev=ans;
         }
 
-        return arr[i];
+        return prev;
     }
-
     public int numDecodings(String s) {
         int arr[] = new int[s.length() + 1];
-        return helper(0, s, s.length(),arr);
+        return helper(s, s.length(), arr);
     }
 }
