@@ -1,19 +1,17 @@
 class Solution {
- int[] memo;
-public int rob(int[] nums) {
-    memo = new int[nums.length + 1];
-    Arrays.fill(memo, -1);
-    return robhelper(nums, nums.length - 1);
-}
-public int robhelper(int[] nums, int i) {
-    if (i < 0) {
-        return 0;
+    public int rob(int[] nums) {
+        if(nums.length==1)
+        return nums[0];
+        int n=nums.length;
+        int dp[]=new int [n];
+        Arrays.fill(dp,-1);
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0],nums[1]);
+        for(int i=2;i<n;i++){
+            int select=nums[i]+dp[i-2];
+            int skip=dp[i-1];
+            dp[i]=Math.max(select,skip);
+        }
+        return dp[n-1];
     }
-    if (memo[i] >= 0) {
-        return memo[i];
-    }
-    int result = Math.max(robhelper(nums, i - 2) + nums[i], robhelper(nums, i - 1));
-    memo[i] = result;
-    return result;
-}
 }
